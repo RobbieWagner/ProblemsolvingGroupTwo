@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MICS_2015_Problem_4 {
@@ -7,8 +9,6 @@ public class MICS_2015_Problem_4 {
         int input = scan.nextInt();
 
         int output = countNumbersWith8Divisors(input);
-
-        System.out.println(output);
 
 
         scan.close();
@@ -22,20 +22,41 @@ public class MICS_2015_Problem_4 {
         int numbersWith8Divisors = 0;
         for(int i = 24; i <= number; i++)
         {
-            if(numberHas8Divisors(i))
-                numbersWith8Divisors++;
+            ArrayList<Integer> powers = new ArrayList<>();
+            PrimeFactorize(i, powers);
         }
 
         return numbersWith8Divisors;
     }
+//
+//    public static int countDivisors(int number){
+//        int divisors = 2;
+//
+//        for(int i = 2; i <= number/2; i++){
+//            if(number % i == 0) divisors++;
+//        }
+//        return divisors;
+//    }
 
-    public static boolean numberHas8Divisors(int number){
-        int divisors = 2;
+    public static void PrimeFactorize(int input, List<Integer> powers) {
+        int number = input;
+        int powersIndex = 0;
+        powers.add(0);
 
-        for(int i = 2; i <= number/2; i++){
-            if(number % i == 0) divisors++;
+        while(number % 2 == 0){
+            number /= 2;
+            powers.set(0, powers.get(0) + 1);
         }
-        if(divisors == 8) return true;
-        return false;
+        for(int i = 3; i < input/2; i+=2){
+
+            int currentIndex = powers.size();
+            powers.add(0);
+
+            while(number % i == 0){
+                number /= i;
+                powers.set(currentIndex, powers.get(currentIndex) + 1);
+            }
+        }
+
     }
 }
