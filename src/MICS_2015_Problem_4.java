@@ -9,7 +9,7 @@ public class MICS_2015_Problem_4 {
         int input = scan.nextInt();
 
         int output = countNumbersWith8Divisors(input);
-
+        System.out.println(output);
 
         scan.close();
     }
@@ -23,7 +23,11 @@ public class MICS_2015_Problem_4 {
         for(int i = 24; i <= number; i++)
         {
             ArrayList<Integer> powers = new ArrayList<>();
-            PrimeFactorize(i, powers);
+            int divisors = PrimeFactorize(i, powers);
+            if (divisors >= 8)
+            {
+                numbersWith8Divisors++;
+            }
         }
 
         return numbersWith8Divisors;
@@ -38,7 +42,7 @@ public class MICS_2015_Problem_4 {
 //        return divisors;
 //    }
 
-    public static void PrimeFactorize(int input, List<Integer> powers) {
+    public static int PrimeFactorize(int input, List<Integer> powers) {
         int number = input;
         int powersIndex = 0;
         powers.add(0);
@@ -58,5 +62,16 @@ public class MICS_2015_Problem_4 {
             }
         }
 
+        int result = 1;
+
+        for(int power : powers)
+        {
+            if(power > 0)
+            {
+                result *= power + 1;
+            }
+        }
+
+        return result;
     }
 }
