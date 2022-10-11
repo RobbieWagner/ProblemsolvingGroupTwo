@@ -30,15 +30,6 @@ public class MICS_2015_Problem_4 {
         return numbersWith8Divisors;
     }
 
-//    public static int countDivisors(int number){
-//        int divisors = 2;
-//
-//        for(int i = 2; i <= number/2; i++){
-//            if(number % i == 0) divisors++;
-//        }
-//        return divisors;
-//    }
-
     public static int PrimeFactorize(int input) {
         List<Integer> powers = new ArrayList<>();
         powers.add(0);
