@@ -21,7 +21,7 @@ public class MICS_2015_Problem_4 {
 
         int numbersWith8Divisors = 0;
         for(int i = 24; i <= number; i++) {
-            int divisors = PrimeFactorize(i);
+            int divisors = CountFactors(i);
             if (divisors == 8) {
                 numbersWith8Divisors++;
             }
@@ -30,7 +30,7 @@ public class MICS_2015_Problem_4 {
         return numbersWith8Divisors;
     }
 
-    public static int PrimeFactorize(int input) {
+    public static int CountFactors(int input) {
         List<Integer> powers = new ArrayList<>();
         powers.add(0);
 
