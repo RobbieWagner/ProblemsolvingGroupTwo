@@ -1,15 +1,44 @@
+import java.util.*;
 import java.util.Scanner;
 
 public class MICS_2015_Problem_6 {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        int input = scan.nextInt();
+        List<String> input = new ArrayList<String>();
 
-        input = convertToBaseTen(input, 2);
-        convertFromBaseTen(input, 2);
+        while(scan.hasNextLine()) {
+            input.add(scan.nextLine());
+        }
+
+        for(String inputString: input) {
+            reformatForFunction(inputString);
+        }
 
         scan.close();
+    }
+
+    public static void reformatForFunction(String input) {
+        String[] passwordAndRequiredLength = input.split(" ");
+
+        String password = passwordAndRequiredLength[0];
+        int requiredLength = Integer.parseInt(passwordAndRequiredLength[1]);
+
+        lengthenPassword(password, requiredLength);
+    }
+
+    private static void lengthenPassword(String password, int requiredLength) {
+        char[] passwordCharacters = password.toCharArray();
+        List<Character> newPassword = new ArrayList<Character>();
+
+        int base = 9;
+
+        //for each character in passwordCharacters
+        //if character is an integer >= base
+        //convert integer to base and add it to the new password list
+        //else add character to newPassword
+        //if newPassword.length == required length
+        //done, print newPassword characters and length
     }
 
     public static int convertFromBaseTen(int input, int baseTo) {
