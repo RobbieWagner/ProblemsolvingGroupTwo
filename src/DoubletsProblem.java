@@ -62,6 +62,31 @@ public class DoubletsProblem {
         }
     }
 
+    public static void addChildren(){
+        // String[] wordsWithOneLetterDifference
+        // ArrayList<Word> addedWords = new ArrayList<Word>
+        // for string in wordsWithOneLetterDifference
+        //      if(!parentWord.unaddableWords.contains(string))
+        //          addedWords.add(new Word(String[string], new ArrayList<String>, findWeight(), true, parentWord)
+        //
+        // for addedWord in addedWords
+        //      unaddableWords.add(parentWord.word)
+        //      for word in addedWords
+        //          addedWords.unaddableWords.add(word.word)
+    }
+
+    public static ArrayList<String> findSameLengthWords(ArrayList<String> dictionary, int wordSize) {
+        ArrayList<String> sameLengthDictionaryWords = new ArrayList<String>();
+
+        for(int i = 0; i < dictionary.size(); i++){
+            if(dictionary.get(i).length() == wordSize){
+                sameLengthDictionaryWords.add(dictionary.get(i));
+            }
+        }
+
+        return sameLengthDictionaryWords;
+    }
+
     public static String[] splitString(String string) {
         return string.split(" ");
     }
