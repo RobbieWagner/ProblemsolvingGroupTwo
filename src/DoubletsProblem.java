@@ -64,7 +64,19 @@ public class DoubletsProblem {
         return string.split(" ");
     }
 
+    public static boolean isWord1LetterDifferent (String word1, String word2) {
+        char[] charA1 = word1.toCharArray();
+        char[] charA2 = word2.toCharArray();
 
+        int differenceCount = 0;
+
+        for(int i = 0; i < word1.length(); i++) {
+            if(charA1[i] != charA2[i]) differenceCount++;
+        }
+
+        if(differenceCount == 1) return true;
+        return false;
+    }
 
 }
 
