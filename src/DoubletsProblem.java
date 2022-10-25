@@ -23,20 +23,22 @@ public class DoubletsProblem {
         //removes blank line
         dictionaryWords.remove(dictionaryWords.size() - 1);
 
+        done = false;
         //adds in input for finding doublets
-        while(scan.hasNextLine()) {
+        while(!done && scan.hasNextLine()) {
             inputWords.add(scan.nextLine());
+            if(inputWords.get(inputWords.size() - 1).equals("")) done = true;
         }
 
         scan.close();
 
-        for(int i = 0; i < dictionaryWords.size(); i++) {
-            System.out.println(dictionaryWords.get(i));
-        }
+//        for(int i = 0; i < dictionaryWords.size(); i++) {
+//            System.out.println(dictionaryWords.get(i));
+//        }
 
         for(String inputString : inputWords) {
             String[] wordToFrom = splitString(inputString);
-            FindPath(wordToFrom[0], wordToFrom[1]);
+            //FindPath(wordToFrom[0], wordToFrom[1]);
         }
 
     }
@@ -77,6 +79,5 @@ public class DoubletsProblem {
         if(differenceCount == 1) return true;
         return false;
     }
-
 }
 
