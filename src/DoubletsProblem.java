@@ -120,7 +120,13 @@ public class DoubletsProblem {
 
     //UNIMPLEMENTED
     public static ArrayList<String> findWordsWithOneLetterDifference(ArrayList<String> dictionary, String word) {
-        return null;
+        ArrayList<String> oneLetterDifferenceWords = new ArrayList<String>();
+        for(String string: dictionary){
+            if(isWord1LetterDifferent(string, word)){
+                oneLetterDifferenceWords.add(string);
+            }
+        }
+        return oneLetterDifferenceWords;
     }
 
     public static String[] splitString(String string) {
@@ -129,7 +135,23 @@ public class DoubletsProblem {
 
     //UNIMPLEMENTED
     public static int findWeight(String parentString, String currentString, String goalString) {
-        return 0;
+        char[] charParent = parentString.toCharArray();
+        char [] charCurrent = currentString.toCharArray();
+        char[] charGoal = goalString.toCharArray();
+
+        int weight = 0;
+
+        for(int i = 0; i < goalString.length(); i++){
+            if(charParent[i] != charCurrent[i]){
+                weight--;
+            }
+            if(charCurrent[i] == charGoal[i]){
+                weight--;
+            }
+        }
+
+
+        return weight;
     }
 
     public static boolean isWord1LetterDifferent (String word1, String word2) {
