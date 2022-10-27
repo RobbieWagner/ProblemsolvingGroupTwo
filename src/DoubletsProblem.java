@@ -32,6 +32,8 @@ public class DoubletsProblem {
 
         scan.close();
 
+
+
 //        for(int i = 0; i < dictionaryWords.size(); i++) {
 //            System.out.println(dictionaryWords.get(i));
 //        }
@@ -41,9 +43,15 @@ public class DoubletsProblem {
             //FindPath(wordToFrom[0], wordToFrom[1], dictionaryWords);
         }
 
+        for(int i = 0; i < inputWords.size(); i +=2 ){
+            FindPath(inputWords.get(i), inputWords.get(i+1), dictionaryWords);
+        }
+
     }
 
     public static void FindPath(String firstWord, String finalWord, ArrayList<String> dictionaryWords) {
+        ArrayList<String> sameLengthWords = findSameLengthWords(dictionaryWords, firstWord.length());
+
         if(firstWord.length() != finalWord.length()) System.out.println("no solution");
         else {
             ArrayList<Word> wordTree = new ArrayList<Word>();
@@ -54,7 +62,7 @@ public class DoubletsProblem {
 
             while(!doneSearching)
             {
-                addChildren(wordTree, currentWord, dictionaryWords, finalWord);
+                addChildren(wordTree, currentWord, sameLengthWords, finalWord);
             }
             //build a "tree" starting with the firstWord
             //add words from the dictionary with the same length and one letter difference
