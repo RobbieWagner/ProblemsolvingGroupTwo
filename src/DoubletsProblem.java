@@ -80,13 +80,17 @@ public class DoubletsProblem {
         if(parentWord.unaddableWords != null) {
             for (String string : wordsWithOneLetterDifference) {
                 if(!parentWord.unaddableWords.contains(string)) {
-                addedWords.add(new Word(string, new ArrayList<String>(), findWeight(startWord, parentWord.word, string, finalWord), true, parentWord));
+                    Word wordToAdd = new Word(string, new ArrayList<String>(), findWeight(startWord, parentWord.word, string, finalWord), true, parentWord);
+                    addedWords.add(wordToAdd);
+                    System.out.println(wordToAdd.toString());
                 }
             }
         }
         else {
             for (String string : wordsWithOneLetterDifference) {
-                addedWords.add(new Word(string, new ArrayList<String>(), findWeight(startWord, parentWord.word, string, finalWord), true, parentWord));
+                Word wordToAdd = new Word(string, new ArrayList<String>(), findWeight(startWord, parentWord.word, string, finalWord), true, parentWord);
+                addedWords.add(wordToAdd);
+                System.out.println(wordToAdd.toString());
             }
         }
 
