@@ -62,7 +62,7 @@ public class DoubletsProblem {
 
             while(!doneSearching)
             {
-                addChildren(wordTree, currentWord, sameLengthWords, finalWord);
+                addChildren(firstWord, wordTree, currentWord, sameLengthWords, finalWord);
             }
             //build a "tree" starting with the firstWord
             //add words from the dictionary with the same length and one letter difference
@@ -81,7 +81,7 @@ public class DoubletsProblem {
     }
 
     // adds children of a word to the tree, creating new word objects
-    public static void addChildren(ArrayList<Word> currentTree, Word parentWord, ArrayList<String> dictionaryWords, String finalWord){
+    public static void addChildren(String startWord, ArrayList<Word> currentTree, Word parentWord, ArrayList<String> dictionaryWords, String finalWord){
         ArrayList<String> wordsWithOneLetterDifference = findWordsWithOneLetterDifference(dictionaryWords, parentWord.word);
         ArrayList<Word> addedWords = new ArrayList<Word>();
 
@@ -89,18 +89,23 @@ public class DoubletsProblem {
         if(parentWord.unaddableWords != null) {
             for (String string : wordsWithOneLetterDifference) {
                 if(!parentWord.unaddableWords.contains(string)) {
-                addedWords.add(new Word(string, new ArrayList<String>(), findWeight(parentWord.word, string, finalWord), true, parentWord));
+                addedWords.add(new Word(string, new ArrayList<String>(), findWeight(startWord, parentWord.word, string, finalWord), true, parentWord));
                 }
             }
         }
         else {
             for (String string : wordsWithOneLetterDifference) {
-                addedWords.add(new Word(string, new ArrayList<String>(), findWeight(parentWord.word, string, finalWord), true, parentWord));
+                addedWords.add(new Word(string, new ArrayList<String>(), findWeight(startWord, parentWord.word, string, finalWord), true, parentWord));
             }
         }
 
         for(Word addedWord : addedWords) {
             addedWord.unaddableWords.add(parentWord.word);
+            if(parentWord.unaddableWords != null) {
+                for(String unaddableWord : parentWord.unaddableWords) {
+                    addedWord.unaddableWords.add(unaddableWord);
+                }
+            }
             for (Word word : addedWords) {
                 addedWord.unaddableWords.add(word.word);
             }
@@ -118,8 +123,7 @@ public class DoubletsProblem {
 
         return sameLengthDictionaryWords;
     }
-
-    //UNIMPLEMENTED
+    
     public static ArrayList<String> findWordsWithOneLetterDifference(ArrayList<String> dictionary, String word) {
         ArrayList<String> oneLetterDifferenceWords = new ArrayList<String>();
         for(String string: dictionary){
@@ -134,25 +138,13 @@ public class DoubletsProblem {
         return string.split(" ");
     }
 
-    //UNIMPLEMENTED
-    public static int findWeight(String parentString, String currentString, String goalString) {
-        char[] charParent = parentString.toCharArray();
-        char [] charCurrent = currentString.toCharArray();
-        char[] charGoal = goalString.toCharArray();
-
-        int weight = 0;
-
-        for(int i = 0; i < goalString.length(); i++){
-            if(charParent[i] != charCurrent[i]){
-                weight--;
-            }
-            if(charCurrent[i] == charGoal[i]){
-                weight--;
-            }
-        }
-
-
-        return weight;
+    // finds the weight a new word should
+    public static int findWeight(String startString, String parentString, String currentString, String goalString) {
+        if(findCharacterDifference(parentString, goalString) > findCharacterDifference(currentString, goalString)) return 2;
+        if(findCharacterDifference(parentString, startString) > findCharacterDifference(currentString, startString)) return 1;
+        if(findCharacterDifference(parentString, goalString) == findCharacterDifference(currentString, goalString) &&
+                findCharacterDifference(parentString, startString) == findCharacterDifference(currentString, startString)) return 0;
+        return -1;
     }
 
     // returns the character difference amount between two words
