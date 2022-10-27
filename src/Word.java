@@ -46,11 +46,14 @@ public class Word {
     }
 
     public String toString() {
-        return "%s%n".formatted(wordToString()) +
-                "%s%n".formatted(unaddableWordsToString()) +
-                "%s%n".formatted(weightToString()) +
-                "%s%n".formatted(isLeafToString()) +
-                "%s%n".formatted(lastWordToString());
+        return ("""
+                %s
+                %s
+                %s
+                %s
+                %s
+                """).formatted(wordToString(), unaddableWordsToString(),
+                     weightToString(), isLeafToString(), lastWordToString());
     }
 
 }
