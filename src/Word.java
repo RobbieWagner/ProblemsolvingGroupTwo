@@ -28,6 +28,7 @@ public class Word {
         final StringBuilder unaddableWordsStringBuilder = new StringBuilder();
         for(String currentUnaddableWordString : unaddableWords) {
             unaddableWordsStringBuilder.append("%s ".formatted(currentUnaddableWordString));
+            System.out.println(currentUnaddableWordString);
         }
         return unaddableWordsStringBuilder.toString();
     }

@@ -41,12 +41,12 @@ public class DoubletsProblem {
 
         for(String inputString : inputWords) {
             String[] wordToFrom = splitString(inputString);
-            //FindPath(wordToFrom[0], wordToFrom[1], dictionaryWords);
+            FindPath(wordToFrom[0], wordToFrom[1], dictionaryWords);
         }
 
-        for(int i = 0; i < inputWords.size(); i +=2 ){
-            FindPath(inputWords.get(i), inputWords.get(i+1), dictionaryWords);
-        }
+        //for(int i = 0; i < inputWords.size(); i +=2 ){
+        //    FindPath(inputWords.get(i), inputWords.get(i+1), dictionaryWords);
+        //}
 
     }
 
@@ -90,7 +90,7 @@ public class DoubletsProblem {
             for (String string : wordsWithOneLetterDifference) {
                 Word wordToAdd = new Word(string, new ArrayList<String>(), findWeight(startWord, parentWord.word, string, finalWord), true, parentWord);
                 addedWords.add(wordToAdd);
-                System.out.println(wordToAdd.toString());
+                //System.out.println(wordToAdd.toString());
             }
         }
 
@@ -99,12 +99,14 @@ public class DoubletsProblem {
             if(parentWord.unaddableWords != null) {
                 for(String unaddableWord : parentWord.unaddableWords) {
                     addedWord.unaddableWords.add(unaddableWord);
+                    System.out.println(addedWord.toString());
                 }
             }
             for (Word word : addedWords) {
                 addedWord.unaddableWords.add(word.word);
             }
         }
+        parentWord.isNoLongerLeaf();
     }
 
     public static ArrayList<String> findSameLengthWords(ArrayList<String> dictionary, int wordSize) {
