@@ -80,6 +80,7 @@ public class DoubletsProblem {
         }
     }
 
+    // adds children of a word to the tree, creating new word objects
     public static void addChildren(ArrayList<Word> currentTree, Word parentWord, ArrayList<String> dictionaryWords, String finalWord){
         ArrayList<String> wordsWithOneLetterDifference = findWordsWithOneLetterDifference(dictionaryWords, parentWord.word);
         ArrayList<Word> addedWords = new ArrayList<Word>();
@@ -152,6 +153,22 @@ public class DoubletsProblem {
 
 
         return weight;
+    }
+
+    // returns the character difference amount between two words
+    public static int findCharacterDifference(String word1, String word2)
+    {
+        char[] word1CA = word1.toCharArray();
+        char[] word2CA = word2.toCharArray();
+
+        int output = 0;
+
+        for(int i = 0; i < word1CA.length; i++)
+        {
+            if(word1CA[i] != word2CA[i]) output++;
+        }
+
+        return output;
     }
 
     public static boolean isWord1LetterDifferent (String word1, String word2) {
