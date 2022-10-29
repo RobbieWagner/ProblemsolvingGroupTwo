@@ -28,7 +28,6 @@ public class Word {
         final StringBuilder unaddableWordsStringBuilder = new StringBuilder();
         for(String currentUnaddableWordString : unaddableWords) {
             unaddableWordsStringBuilder.append("%s ".formatted(currentUnaddableWordString));
-            System.out.println(currentUnaddableWordString);
         }
         return unaddableWordsStringBuilder.toString();
     }
@@ -47,13 +46,13 @@ public class Word {
 
     public String toString() {
         return ("""
-                %s
-                %s
-                %s
-                %s
-                %s
-                """).formatted(wordToString(), unaddableWordsToString(),
-                     weightToString(), isLeafToString(), lastWordToString());
+                Word: %s
+                Previous word: %s
+                Weight: %s
+                %s a leaf
+                Unaddable words: %s
+                """).formatted(wordToString(), lastWordToString(), weightToString(),
+                               isLeaf ? "Is" : "Is not", unaddableWordsToString());
     }
 
 }
