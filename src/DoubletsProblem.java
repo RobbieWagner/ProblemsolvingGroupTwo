@@ -56,6 +56,7 @@ public class DoubletsProblem {
         if(firstWord.length() != finalWord.length() || !dictionaryWords.contains(firstWord) || !dictionaryWords.contains(finalWord)) System.out.println("no solution");
         else {
             ArrayList<Word> wordTree = new ArrayList<Word>();
+            System.out.println(firstWord + " 1");
 
             Word startWord = new Word(firstWord, new ArrayList<String>(), 0, true, null);
             boolean doneSearching = false;
@@ -99,6 +100,7 @@ public class DoubletsProblem {
             if(parentWord.unaddableWords != null) {
                 for(String unaddableWord : parentWord.unaddableWords) {
                     addedWord.unaddableWords.add(unaddableWord);
+                    System.out.println(addedWord.unaddableWordsToString().length());
                     System.out.println(addedWord.toString());
                 }
             }
